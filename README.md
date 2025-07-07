@@ -1,21 +1,42 @@
-NeonResearch-AI
-An advanced AI research assistant with a vibrant neon-styled terminal interface built using Python and Rich. This application provides an interactive way to research topics with dynamic animations and visual effects.
 
-Features
-✨ Vibrant neon-styled terminal UI with dynamic animations
-🌈 Color-cycling effects and pulsing neon logo
-🤖 Support for multiple AI models (Claude and GPT)
-🔍 Multiple research tools:
-Web search
-Wikipedia lookup
-Weather information
-News articles
-File saving
-📊 Real-time status updates with color-cycling animations
-💾 Save research results to markdown files
-📈 Statistics tracking
-🎨 Stylish neon-bordered interface elements
-⚡ Animated typing effects and transitions
-Requirements
-Python 3.8+
-API key from either OpenAI or Anthropic
+# Gemini AI Terminal Chatbot
+
+A modern, professional, and animated terminal-based chatbot powered by Google Gemini (via LangChain) and the Rich library for a beautiful user experience.
+
+## Features
+- ✨ Professional, animated terminal UI (Rich)
+- 🤖 Uses Google Gemini API (via LangChain)
+- 📝 Real answers from Gemini, not fake/generated
+- � Modern, user-friendly, and responsive design
+- ⏳ Animated typing and loading effects
+- 🔒 API key managed securely with dotenv
+
+## Requirements
+- Python 3.8+
+- Gemini API key (get from Google AI Studio)
+
+## Setup
+1. Clone this repo and enter the folder.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Copy `.env.example` to `.env` and add your Gemini API key.
+
+## Usage
+```bash
+python gemini_chatbot.py
+```
+
+## Project Structure
+- `gemini_chatbot.py` — Main Gemini chatbot app (Rich UI, LangChain, Gemini)
+- `requirements.txt` — Python dependencies
+- `.env.example` — Example for environment variables
+
+## How it Works
+- User enters a message in the terminal.
+- The app sends the message to Gemini via LangChain.
+- Gemini's real answer is shown with animated typing.
+
+## License
+MIT

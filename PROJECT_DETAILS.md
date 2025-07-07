@@ -1,191 +1,59 @@
-# SpicyNick Research System - Detailed Project Documentation
+
+# Gemini AI Terminal Chatbot - Project Documentation
 
 ## Project Overview
 
-The SpicyNick Research System is an advanced AI-powered research assistant with a vibrant neon-styled terminal interface. It allows users to input research queries and receive comprehensive information gathered from various sources. The system features dynamic animations, color-cycling effects, and a stylish interface that makes the research experience more engaging.
+The Gemini AI Terminal Chatbot is a modern, professional, and animated terminal-based chatbot powered by Google Gemini (via LangChain) and the Rich library. It provides real, high-quality answers from Gemini in a beautiful, user-friendly terminal interface with animated effects.
 
 ## Technologies Used
 
+
 ### Core Technologies:
-1. **Python**: The entire application is built using Python, a versatile programming language ideal for AI applications.
-
-2. **LangChain**: This is the AI orchestration framework that powers the intelligence behind the system. LangChain connects large language models (LLMs) with external tools and data sources.
-
-3. **Large Language Models (LLMs)**:
-   - **OpenAI GPT models**: Used for processing queries and generating research content
-   - **Anthropic Claude**: An alternative LLM that can be used instead of GPT
-
-4. **Rich Library**: A Python library for creating rich terminal interfaces with colors, styling, and animations.
-
-5. **Python-dotenv**: For managing environment variables and API keys securely.
-
-### External APIs and Services:
-1. **OpenAI API**: For accessing GPT models
-2. **Anthropic API**: For accessing Claude models
-3. **OpenWeatherMap API**: For retrieving weather information
-4. **Tavily API**: For news search functionality
-5. **Wikipedia API**: For accessing encyclopedia information
-6. **DuckDuckGo Search**: For web search capabilities
+1. **Python**: Main programming language
+2. **Rich**: For animated, modern terminal UI
+3. **LangChain**: For LLM orchestration
+4. **Google Gemini API**: For real AI answers
+5. **python-dotenv**: For secure API key management
 
 ### Project Structure:
-1. **main.py**: The standard version of the application
-2. **custom_research.py**: The enhanced SpicyNick version with neon effects
-3. **tools.py**: Contains custom tools for the AI agent
-4. **.env**: Stores API keys and configuration
-5. **requirements.txt**: Lists all Python dependencies
+- `gemini_chatbot.py`: Main Gemini chatbot app (Rich UI, LangChain, Gemini)
+- `requirements.txt`: Python dependencies
+- `.env.example`: Example for environment variables
 
-## How the System Works (Technical Details)
 
-### 1. AI Agent Architecture
-The system uses LangChain's agent framework to create an AI assistant that can:
-- Understand natural language queries
-- Decide which tools to use for gathering information
-- Process and synthesize information from multiple sources
-- Generate comprehensive research reports
 
-The agent follows this process:
-1. Receives a user query
-2. Plans which tools to use based on the query
-3. Executes tools to gather information
-4. Synthesizes the information into a coherent response
-5. Formats and presents the research to the user
 
-### 2. Terminal UI Implementation
-The Rich library is used to create a sophisticated terminal interface:
-- Custom panels for displaying information
-- Color styling for better visual hierarchy
-- Spinners and progress bars for loading animations
-- Dynamic text effects for engaging user experience
+## How the System Works
 
-In the SpicyNick version, additional visual effects include:
-- Color-cycling animations using RGB hex codes
-- Pulsing neon effects achieved through timed color changes
-- Animated typing effects using character-by-character rendering
-- Custom ASCII art for the SpicyNick logo
+1. User enters a message in the terminal.
+2. The app sends the message to Gemini via LangChain.
+3. Gemini's real answer is shown with animated typing in a modern UI.
 
-### 3. Tool Integration
-The system integrates various tools through LangChain's tool framework:
-- Each tool is wrapped in a standardized interface
-- Tools can be dynamically selected based on the query
-- Results from tools are processed and incorporated into the final response
 
-### 4. Data Processing Pipeline
-1. User input → Natural language understanding
-2. Query planning → Tool selection
-3. Information gathering → Multiple sources
-4. Information synthesis → Coherent response
-5. Formatting → Styled output
+## Setup
 
-## Step-by-Step Build Process
+1. Clone this repo and enter the folder.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Copy `.env.example` to `.env` and add your Gemini API key.
 
-### 1. Setting Up the Development Environment
+## Usage
 ```bash
-# Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install langchain langchain-openai langchain-anthropic python-dotenv rich requests wikipedia duckduckgo-search
+python gemini_chatbot.py
 ```
 
-### 2. Obtaining API Keys
-1. Create accounts on:
-   - OpenAI (https://platform.openai.com)
-   - Anthropic (https://console.anthropic.com)
-   - OpenWeatherMap (https://openweathermap.org/api)
-   - Tavily (for news search)
+## Example Workflow
+- User types a message in the terminal.
+- Gemini responds with a real answer, shown with animated typing.
 
-2. Generate API keys from each service
+## Notes
+- Only the Gemini API is used for answers (no fake or static responses).
+- The UI is fully terminal-based, animated, and user-friendly.
 
-3. Create a `.env` file with your API keys:
-```
-OPENAI_API_KEY="your_openai_api_key"
-ANTHROPIC_API_KEY="your_anthropic_api_key"
-OPENWEATHERMAP_API_KEY="your_openweathermap_api_key"
-TAVILY_API_KEY="your_tavily_api_key"
-```
-
-### 3. Building the Core AI System
-1. Set up the LangChain agent with appropriate tools:
-```python
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain.tools import Tool
-
-# Create tools
-search_tool = DuckDuckGoSearchRun(api_wrapper=search_wrapper)
-wiki_tool = WikipediaQueryRun(api_wrapper=wiki_wrapper)
-weather_tool = Tool(name="weather", func=weather_tool_run.run)
-
-# Create agent
-agent = create_tool_calling_agent(llm=llm, prompt=prompt, tools=tools)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
-```
-
-2. Implement the research generation function:
-```python
-def generate_research(query):
-    """Generate a research response for the given query"""
-    response = agent_executor.invoke({"query": query})
-    return process_response(response)
-```
-
-### 4. Building the Terminal UI
-1. Create the basic interface structure:
-```python
-from rich.console import Console
-from rich.panel import Panel
-
-console = Console()
-
-# Display header
-console.print("[bold]SpicyNick Research System[/bold]")
-
-# Create a panel for results
-panel = Panel(content, title="Research Results")
-console.print(panel)
-```
-
-2. Add animations and styling:
-```python
-# Thinking animation
-def start_thinking_animation():
-    frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
-    for i in range(50):
-        console.print(f"\r[bold]{frames[i % len(frames)]} Thinking...[/bold]", end="")
-        time.sleep(0.1)
-```
-
-### 5. Implementing the SpicyNick Enhancements
-1. Create neon color effects:
-```python
-neon_colors = ["#FF00FF", "#FF3366", "#FF0066", "#FF3300"]
-
-for color in neon_colors:
-    console.print(f"[bold {color}]{logo}[/bold {color}]")
-    time.sleep(0.1)
-```
-
-2. Add typing animation:
-```python
-def typing_animation(text, color="#FF00FF"):
-    typed_text = ""
-    for char in text:
-        typed_text += char
-        console.print(f"\r[bold {color}]{typed_text}[/bold {color}]", end="")
-        time.sleep(0.05)
-```
-
-### 6. Testing and Debugging
-1. Test with various queries to ensure the AI responds correctly
-2. Debug any issues with tool integration
-3. Refine the UI for better user experience
-4. Optimize animations for performance
-
-### 7. Packaging and Documentation
-1. Create requirements.txt with all dependencies
-2. Write comprehensive README.md
-3. Add comments and docstrings to the code
-4. Prepare for deployment
+## License
+MIT
 
 ## Interview Questions and Answers
 
